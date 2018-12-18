@@ -1,32 +1,27 @@
 package io.github.nowakprojects.cqrsworkshop.withoutcqrs;
 
-import java.util.Comparator;
-import java.util.SortedSet;
-import java.util.TreeSet;
-import java.util.stream.Collectors;
-
 public class BookDto {
     private String id;
     private String title;
+    private Integer ratingsCount;
     private Double averageRating;
-    private SortedSet<OpinionDto> opinions;
+    private OpinionDto lastOpinion;
 
-    private BookDto(String id, String title, Double averageRating, SortedSet<OpinionDto> opinions) {
+    private BookDto(String id, String title, Integer ratingsCount, Double averageRating, OpinionDto lastOpinion) {
         this.id = id;
         this.title = title;
+        this.ratingsCount = ratingsCount;
         this.averageRating = averageRating;
-        this.opinions = opinions;
+        this.lastOpinion = lastOpinion;
     }
 
     public static BookDto from(Book book) {
         return new BookDto(
                 book.getId(),
                 book.getTitle(),
+                book.getRatingsCount(),
                 book.getAverageRating(),
-                book.getOpinions()
-                        .stream()
-                        .map(OpinionDto::from)
-                        .collect(Collectors.toCollection(() -> new TreeSet<>(Comparator.comparing(OpinionDto::getRating, Comparator.naturalOrder()))))
+                OpinionDto.from(book.getLastOpinion())
         );
     }
 
@@ -42,7 +37,11 @@ public class BookDto {
         return averageRating;
     }
 
-    public SortedSet<OpinionDto> getOpinions() {
-        return opinions;
+    public Integer getRatingsCount() {
+        return ratingsCount;
+    }
+
+    public OpinionDto getLastOpinion() {
+        return lastOpinion;
     }
 }

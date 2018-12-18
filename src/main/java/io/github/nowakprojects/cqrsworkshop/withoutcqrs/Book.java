@@ -2,10 +2,7 @@ package io.github.nowakprojects.cqrsworkshop.withoutcqrs;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
-import java.util.UUID;
+import java.util.*;
 
 @Entity
 public class Book {
@@ -16,15 +13,21 @@ public class Book {
     @NotBlank
     private String title;
 
+    private String author;
+
+    private String genre;
+
     @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private List<Opinion> opinions = new ArrayList<>();
 
     @Version
     private Long version;
 
-    public Book(@NotBlank String title) {
-        this.title = title;
+    public Book(@NotBlank String title, String author, String genre) {
         this.id = UUID.randomUUID().toString();
+        this.title = title;
+        this.author = author;
+        this.genre = genre;
     }
 
     //FIXME: Is only for reading purpose
@@ -43,6 +46,10 @@ public class Book {
         }
     }
 
+    public Integer getRatingsCount() {
+        return opinions.size();
+    }
+
     //FIXME: Is only for reading purpose
     public Double getAverageRating() {
         return opinions.stream()
@@ -50,9 +57,22 @@ public class Book {
                 .average().orElse(0);
     }
 
+    public String getAuthor() {
+        return author;
+    }
+
+    public String getGenre() {
+        return genre;
+    }
+
     //FIXME: Is only for reading purpose
-    public List<Opinion> getOpinions() {
+    /*public List<Opinion> getOpinions() {
         return opinions;
+    }*/
+
+    //FIXME: Is only for reading purpose
+    public Opinion getLastOpinion(){
+        return opinions.stream().skip(opinions.size() - 1).findFirst().orElse(null);
     }
 
     @Override

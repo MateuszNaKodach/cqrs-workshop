@@ -39,7 +39,9 @@ public class DataBootstrap {
     private io.github.nowakprojects.cqrsworkshop.withoutcqrs.Book generateBook() {
         Book fakeBook = faker.book();
         io.github.nowakprojects.cqrsworkshop.withoutcqrs.Book book = new io.github.nowakprojects.cqrsworkshop.withoutcqrs.Book(
-                fakeBook.title()
+                fakeBook.title(),
+                fakeBook.author(),
+                fakeBook.genre()
         );
 
         for (int j = 0; j < OPINIONS_PER_BOOK_COUNT; j++) {
