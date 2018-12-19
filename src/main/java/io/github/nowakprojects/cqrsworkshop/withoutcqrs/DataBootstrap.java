@@ -12,8 +12,8 @@ import java.util.Random;
 @Component
 public class DataBootstrap {
 
-    private static final int BOOKS_COUNT = 999;
-    private static final int OPINIONS_PER_BOOK_COUNT = 99;
+    private static final int BOOKS_COUNT = 99;
+    private static final int OPINIONS_PER_BOOK_COUNT = 9999;
 
 
     private final Logger log = LoggerFactory.getLogger(this.getClass());
