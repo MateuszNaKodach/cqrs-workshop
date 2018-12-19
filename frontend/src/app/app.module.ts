@@ -9,6 +9,8 @@ import { BookCreatorComponent } from './component/book-creator/book-creator.comp
 import {HttpClientModule} from "@angular/common/http";
 import { BookExplorerComponent } from './component/book-explorer/book-explorer.component';
 import { BookCqrsExplorerComponent } from './component/book-cqrs-explorer/book-cqrs-explorer.component';
+import { LoaderComponent } from './component/loader/loader.component';
+import { PerformanceStatsComponent } from './component/performance-stats/performance-stats.component';
 
 @NgModule({
   declarations: [
@@ -17,7 +19,9 @@ import { BookCqrsExplorerComponent } from './component/book-cqrs-explorer/book-c
     BookItemComponent,
     BookCreatorComponent,
     BookExplorerComponent,
-    BookCqrsExplorerComponent
+    BookCqrsExplorerComponent,
+    LoaderComponent,
+    PerformanceStatsComponent
   ],
   imports: [
     BrowserModule,

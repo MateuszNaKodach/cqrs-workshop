@@ -5,13 +5,17 @@ import io.github.nowakprojects.cqrsworkshop.withoutcqrs.Book;
 public class BookDto {
     private String id;
     private String title;
+    private String author;
+    private String genre;
     private Integer ratingsCount;
     private Double averageRating;
     private OpinionDto lastOpinion;
 
-    private BookDto(String id, String title, Integer ratingsCount, Double averageRating, OpinionDto lastOpinion) {
+    public BookDto(String id, String title, String author, String genre, Integer ratingsCount, Double averageRating, OpinionDto lastOpinion) {
         this.id = id;
         this.title = title;
+        this.author = author;
+        this.genre = genre;
         this.ratingsCount = ratingsCount;
         this.averageRating = averageRating;
         this.lastOpinion = lastOpinion;
@@ -21,6 +25,8 @@ public class BookDto {
         return new BookDto(
                 book.getId(),
                 book.getTitle(),
+                book.getAuthor(),
+                book.getGenre(),
                 book.getRatingsCount(),
                 book.getAverageRating(),
                 OpinionDto.from(book.getLastOpinion())

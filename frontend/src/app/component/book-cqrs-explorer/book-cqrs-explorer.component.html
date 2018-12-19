@@ -1,6 +1,11 @@
-<div *ngIf="books$ | async as books">
-  <div>
-    {{lastRequestMillis}}
+<div *ngIf="books$ | async as books; else loader">
+  <div style="margin-top: 1rem; margin-bottom: 1rem;">
+    Zapytanie wykonane w <b>{{lastRequestMillis.toFixed(2)}}</b> milisekund
   </div>
-  {{books | json}}
+  <app-book-list [books]="books"></app-book-list>
 </div>
+<ng-template #loader>
+  <div style="display: flex; justify-content: center; margin: 2rem;">
+    <app-loader></app-loader>
+  </div>
+</ng-template>

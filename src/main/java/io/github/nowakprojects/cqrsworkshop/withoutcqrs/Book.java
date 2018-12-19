@@ -1,5 +1,8 @@
 package io.github.nowakprojects.cqrsworkshop.withoutcqrs;
 
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import java.util.*;
@@ -17,6 +20,7 @@ public class Book {
 
     private String genre;
 
+    @Fetch(FetchMode.JOIN)
     @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private List<Opinion> opinions = new ArrayList<>();
 
