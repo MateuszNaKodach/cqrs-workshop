@@ -13,13 +13,13 @@ import java.util.stream.Collectors;
 
 @CrossOrigin
 @RestController
-@RequestMapping("/books")
-public class BookController {
+@RequestMapping("/cqrs/books")
+public class BookCqrsController {
 
     private final BookRepository bookRepository;
     private final DataBootstrap dataBootstrap;
 
-    public BookController(BookRepository bookRepository, DataBootstrap dataBootstrap) {
+    public BookCqrsController(BookRepository bookRepository, DataBootstrap dataBootstrap) {
         this.bookRepository = bookRepository;
         this.dataBootstrap = dataBootstrap;
     }

@@ -13,7 +13,7 @@ public class Opinion {
     @Id
     private String id;
 
-    private String author;
+    private String author; //TODO: Nowe entity, i dodanie badge jesli to admin napisał (kolejna tabela)
     private String content;
     private Integer rating;
     private Instant createDate;

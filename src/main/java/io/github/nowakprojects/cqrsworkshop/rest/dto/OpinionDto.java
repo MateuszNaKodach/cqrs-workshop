@@ -1,4 +1,6 @@
-package io.github.nowakprojects.cqrsworkshop.withoutcqrs;
+package io.github.nowakprojects.cqrsworkshop.rest.dto;
+
+import io.github.nowakprojects.cqrsworkshop.withoutcqrs.Opinion;
 
 import java.time.Instant;
 

@@ -1,4 +1,6 @@
-package io.github.nowakprojects.cqrsworkshop.withoutcqrs;
+package io.github.nowakprojects.cqrsworkshop.rest.dto;
+
+import io.github.nowakprojects.cqrsworkshop.withoutcqrs.Book;
 
 public class BookDto {
     private String id;

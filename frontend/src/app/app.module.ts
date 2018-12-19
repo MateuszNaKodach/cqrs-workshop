@@ -3,14 +3,26 @@ import { NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { BookListComponent } from './component/book-list/book-list.component';
+import { BookItemComponent } from './component/book-list/book-item/book-item.component';
+import { BookCreatorComponent } from './component/book-creator/book-creator.component';
+import {HttpClientModule} from "@angular/common/http";
+import { BookExplorerComponent } from './component/book-explorer/book-explorer.component';
+import { BookCqrsExplorerComponent } from './component/book-cqrs-explorer/book-cqrs-explorer.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    BookListComponent,
+    BookItemComponent,
+    BookCreatorComponent,
+    BookExplorerComponent,
+    BookCqrsExplorerComponent
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]
