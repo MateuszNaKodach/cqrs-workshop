@@ -66,7 +66,7 @@ public class Book {
     }
 
     //FIXME: Is only for reading purpose
-    /*public List<Opinion> getOpinions() {
+    /*public List<OpinionWriteModel> getOpinions() {
         return opinions;
     }*/
 

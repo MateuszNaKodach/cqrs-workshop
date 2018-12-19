@@ -1,7 +1,12 @@
-package io.github.nowakprojects.cqrsworkshop.withoutcqrs;
+package io.github.nowakprojects.cqrsworkshop.cqrs;
 
 import com.github.javafaker.Book;
 import com.github.javafaker.Faker;
+import io.github.nowakprojects.cqrsworkshop.cqrs.write.BookWriteModel;
+import io.github.nowakprojects.cqrsworkshop.cqrs.write.BookWriteModelRepository;
+import io.github.nowakprojects.cqrsworkshop.cqrs.write.OpinionWriteModel;
+import io.github.nowakprojects.cqrsworkshop.withoutcqrs.BookRepository;
+import io.github.nowakprojects.cqrsworkshop.withoutcqrs.Opinion;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
@@ -13,38 +18,38 @@ import static io.github.nowakprojects.cqrsworkshop.ExampleConstants.BOOKS_COUNT;
 import static io.github.nowakprojects.cqrsworkshop.ExampleConstants.OPINIONS_PER_BOOK_COUNT;
 
 @Component
-public class DataBootstrap {
+public class CqrsDataBootstrap {
+
 
     private final Logger log = LoggerFactory.getLogger(this.getClass());
 
-    private final BookRepository bookRepository;
+    private final BookWriteModelRepository bookRepository;
     private final Faker faker = new Faker(Locale.ENGLISH);
     private final Random random = new Random();
 
-
-    public DataBootstrap(BookRepository bookRepository) {
+    public CqrsDataBootstrap(BookWriteModelRepository bookRepository) {
         this.bookRepository = bookRepository;
     }
 
     public void loadFakeBooks() {
         log.info("Start loading fake books");
         for (int i = 0; i < BOOKS_COUNT; i++) {
-            io.github.nowakprojects.cqrsworkshop.withoutcqrs.Book book = generateBook();
+            BookWriteModel book = generateBook();
             bookRepository.save(book);
         }
         log.info("Finish loading fake books");
     }
 
-    private io.github.nowakprojects.cqrsworkshop.withoutcqrs.Book generateBook() {
+    private BookWriteModel generateBook() {
         Book fakeBook = faker.book();
-        io.github.nowakprojects.cqrsworkshop.withoutcqrs.Book book = new io.github.nowakprojects.cqrsworkshop.withoutcqrs.Book(
+        BookWriteModel book = new BookWriteModel(
                 fakeBook.title(),
                 fakeBook.author(),
                 fakeBook.genre()
         );
 
         for (int j = 0; j < OPINIONS_PER_BOOK_COUNT; j++) {
-            book.addOpinion(new Opinion("Author" + j, faker.chuckNorris().fact(), random.nextInt(10)+1));
+            book.addOpinion(new OpinionWriteModel("Author" + j, faker.chuckNorris().fact(), random.nextInt(10) + 1));
         }
         return book;
     }

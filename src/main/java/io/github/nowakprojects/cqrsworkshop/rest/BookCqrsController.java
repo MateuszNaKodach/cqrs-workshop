@@ -1,5 +1,8 @@
 package io.github.nowakprojects.cqrsworkshop.rest;
 
+import io.github.nowakprojects.cqrsworkshop.cqrs.CqrsDataBootstrap;
+import io.github.nowakprojects.cqrsworkshop.cqrs.read.BookReadModel;
+import io.github.nowakprojects.cqrsworkshop.cqrs.read.BookReadModelRepository;
 import io.github.nowakprojects.cqrsworkshop.rest.dto.BookDto;
 import io.github.nowakprojects.cqrsworkshop.withoutcqrs.BookRepository;
 import io.github.nowakprojects.cqrsworkshop.withoutcqrs.DataBootstrap;
@@ -16,26 +19,23 @@ import java.util.stream.Collectors;
 @RequestMapping("/cqrs/books")
 public class BookCqrsController {
 
-    private final BookRepository bookRepository;
-    private final DataBootstrap dataBootstrap;
+    private final BookReadModelRepository bookRepository;
+    private final CqrsDataBootstrap cqrsDataBootstrap;
 
-    public BookCqrsController(BookRepository bookRepository, DataBootstrap dataBootstrap) {
+    public BookCqrsController(BookReadModelRepository bookRepository, CqrsDataBootstrap cqrsDataBootstrap) {
         this.bookRepository = bookRepository;
-        this.dataBootstrap = dataBootstrap;
+        this.cqrsDataBootstrap = cqrsDataBootstrap;
+    }
+
+    @GetMapping
+    Collection<BookReadModel> getBooks() {
+        return bookRepository.findAll();
     }
 
     @GetMapping("load-fake")
     String loadFakeBooks() {
-        dataBootstrap.loadFakeBooks();
+        cqrsDataBootstrap.loadFakeBooks();
         return "Books loaded";
-    }
-
-    @GetMapping
-    Collection<BookDto> getBooks() {
-        return bookRepository.findAll()
-                .stream()
-                .map(BookDto::from)
-                .collect(Collectors.toList());
     }
 
 }

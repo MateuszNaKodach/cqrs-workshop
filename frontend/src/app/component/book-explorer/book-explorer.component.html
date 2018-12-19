@@ -1,3 +1,6 @@
-<p>
-  book-explorer works!
-</p>
+<div *ngIf="books$ | async as books">
+  <div>
+    {{lastRequestMillis}}
+  </div>
+  {{books | json}}
+</div>
