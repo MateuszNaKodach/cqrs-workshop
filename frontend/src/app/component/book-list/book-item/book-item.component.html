@@ -1,0 +1,27 @@
+<div class="app-book-item" style="height: 310px;">
+  <div class="card-header" style="font-weight: bold">
+    {{book.title}}
+  </div>
+  <div class="card-body" style="display: flex; flex-flow: column;">
+    <div style="display: flex; justify-content: space-between">
+      <div>
+        <p class="card-text"><b>Author: </b>{{book.author}}</p>
+        <p class="card-text"><b>Genre: </b>{{book.genre}}</p>
+      </div>
+      <div style="display: flex; flex-flow: column; align-items: flex-end">
+        <div>Average rating:</div>
+        <p class="card-text" style="font-size: 2rem; font-weight: bold;">{{book.averageRating.toFixed(2)}}</p>
+        <!--<div>Ratings: {{book.ratingsCount}}</div>-->
+      </div>
+    </div>
+    <blockquote class="blockquote"
+                style="margin-top: 1rem; font-size: 1rem !important; background: lightblue; border-radius: 8px; padding: 1rem; justify-self: flex-end">
+      <div style="font-weight: bold">Last opinion:</div>
+      <p class="mb-0">{{book.lastOpinion.content}}</p>
+      <div style="display: flex; justify-content: space-between">
+        <footer class="blockquote-footer">{{book.lastOpinion.author}}</footer>
+        <div><b>Rating: </b> {{book.lastOpinion.rating}}</div>
+      </div>
+    </blockquote>
+  </div>
+</div>

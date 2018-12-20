@@ -1,0 +1,17 @@
+<div *ngIf="performanceStatistics$ | async as stats" class="performance-stats">
+  <p>Last requests timing comparision: </p>
+  <div style="display: flex; justify-content: space-between">
+    <div>
+      <div>
+        <b>Without CQRS: </b>{{stats.withoutCqrsMilis.toFixed(2)}} ms
+      </div>
+      <div>
+        <b>CQRS: </b>{{stats.cqrsMilis.toFixed(2)}} ms
+      </div>
+    </div>
+    <div style="color: green; font-size: 2rem; font-weight: bold">
+      x{{(stats.withoutCqrsMilis / stats.cqrsMilis).toFixed(0)}}
+    </div>
+  </div>
+
+</div>
