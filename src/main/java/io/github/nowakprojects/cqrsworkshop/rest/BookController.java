@@ -3,10 +3,7 @@ package io.github.nowakprojects.cqrsworkshop.rest;
 import io.github.nowakprojects.cqrsworkshop.rest.dto.BookDto;
 import io.github.nowakprojects.cqrsworkshop.withoutcqrs.BookRepository;
 import io.github.nowakprojects.cqrsworkshop.withoutcqrs.DataBootstrap;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Collection;
 import java.util.stream.Collectors;
@@ -28,6 +25,11 @@ public class BookController {
     String loadFakeBooks() {
         dataBootstrap.loadFakeBooks();
         return "Books loaded";
+    }
+
+    @PostMapping
+    BookDto addFakeBook() {
+        return BookDto.from(bookRepository.save(dataBootstrap.generateBook()));
     }
 
     @GetMapping

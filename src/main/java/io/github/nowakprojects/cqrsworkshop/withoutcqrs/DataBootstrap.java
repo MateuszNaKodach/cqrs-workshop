@@ -35,7 +35,7 @@ public class DataBootstrap {
         log.info("Finish loading fake books");
     }
 
-    private io.github.nowakprojects.cqrsworkshop.withoutcqrs.Book generateBook() {
+    public io.github.nowakprojects.cqrsworkshop.withoutcqrs.Book generateBook() {
         Book fakeBook = faker.book();
         io.github.nowakprojects.cqrsworkshop.withoutcqrs.Book book = new io.github.nowakprojects.cqrsworkshop.withoutcqrs.Book(
                 fakeBook.title(),

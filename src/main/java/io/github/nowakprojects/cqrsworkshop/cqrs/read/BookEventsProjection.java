@@ -11,9 +11,11 @@ import java.util.Optional;
 public class BookEventsProjection {
 
     private final BookReadModelRepository repository;
+    private final ObservableDomainEventStream observableDomainEventStream;
 
-    public BookEventsProjection(BookReadModelRepository repository) {
+    public BookEventsProjection(BookReadModelRepository repository, ObservableDomainEventStream observableDomainEventStream) {
         this.repository = repository;
+        this.observableDomainEventStream = observableDomainEventStream;
     }
 
     @TransactionalEventListener
@@ -26,6 +28,7 @@ public class BookEventsProjection {
         } else {
             repository.save(BookReadModel.from(event));
         }
+        observableDomainEventStream.pushEvent(event);
     }
 
     @TransactionalEventListener
@@ -38,6 +41,7 @@ public class BookEventsProjection {
         } else {
             repository.save(BookReadModel.from(event));
         }
+        observableDomainEventStream.pushEvent(event);
     }
 
 }

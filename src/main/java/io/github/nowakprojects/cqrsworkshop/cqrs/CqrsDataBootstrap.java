@@ -40,7 +40,7 @@ public class CqrsDataBootstrap {
         log.info("Finish loading fake books");
     }
 
-    private BookWriteModel generateBook() {
+    public BookWriteModel generateBook() {
         Book fakeBook = faker.book();
         BookWriteModel book = new BookWriteModel(
                 fakeBook.title(),
