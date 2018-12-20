@@ -9,6 +9,7 @@ import io.github.nowakprojects.cqrsworkshop.withoutcqrs.BookRepository;
 import io.github.nowakprojects.cqrsworkshop.withoutcqrs.Opinion;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Component;
 
 import java.util.Locale;
@@ -40,7 +41,7 @@ public class CqrsDataBootstrap {
         log.info("Finish loading fake books");
     }
 
-    public BookWriteModel generateBook() {
+    private BookWriteModel generateBook() {
         Book fakeBook = faker.book();
         BookWriteModel book = new BookWriteModel(
                 fakeBook.title(),
@@ -52,5 +53,11 @@ public class CqrsDataBootstrap {
             book.addOpinion(new OpinionWriteModel("Author" + j, faker.chuckNorris().fact(), random.nextInt(10) + 1));
         }
         return book;
+    }
+
+    @Async
+    public void addBookAsync() throws InterruptedException {
+        Thread.sleep(4000);
+        bookRepository.save(generateBook());
     }
 }

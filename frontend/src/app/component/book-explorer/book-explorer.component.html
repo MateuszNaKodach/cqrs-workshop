@@ -2,7 +2,10 @@
   <div style="margin-top: 1rem; margin-bottom: 1rem;">
     Zapytanie wykonane w <b>{{lastRequestMillis.toFixed(2)}}</b> milisekund
   </div>
-  <app-book-list [books]="books"></app-book-list>
+  <button type="button" class="btn btn-success" (click)="onClickNewFakeBook()">Add new fake book</button>
+  <div style="margin-top: 1rem; margin-bottom: 1rem;">
+    <app-book-list [books]="books"></app-book-list>
+  </div>
 </div>
 <ng-template #loader>
   <div style="display: flex; justify-content: center; margin: 2rem;">

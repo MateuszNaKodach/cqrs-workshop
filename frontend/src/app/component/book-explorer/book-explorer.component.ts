@@ -20,6 +20,10 @@ export class BookExplorerComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.updateBooks();
+  }
+
+  private updateBooks() {
     let t0 = performance.now();
     this.books$ = this.booksEndpoint.getBooks()
       .pipe(
@@ -30,4 +34,10 @@ export class BookExplorerComponent implements OnInit {
       );
   }
 
+  onClickNewFakeBook() {
+    this.booksEndpoint.addNewBook()
+      .pipe(
+        tap(_ => this.updateBooks())
+      ).subscribe()
+  }
 }

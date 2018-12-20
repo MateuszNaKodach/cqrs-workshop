@@ -12,11 +12,14 @@ import io.github.nowakprojects.cqrsworkshop.withoutcqrs.BookRepository;
 import io.github.nowakprojects.cqrsworkshop.withoutcqrs.DataBootstrap;
 import io.reactivex.Flowable;
 import org.springframework.http.MediaType;
+import org.springframework.scheduling.annotation.Async;
+import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Collection;
 import java.util.stream.Collectors;
 
+@EnableAsync
 @CrossOrigin
 @RestController
 @RequestMapping("/cqrs/books")
@@ -45,12 +48,12 @@ public class BookCqrsController {
     }
 
     @PostMapping
-    BookWriteModel addFakeBook() {
-        return bookWriteModelRepository.save(cqrsDataBootstrap.generateBook());
+    void addFakeBook() throws InterruptedException {
+        cqrsDataBootstrap.addBookAsync();
     }
 
 
-    @GetMapping(name = "event-stream", produces = MediaType.TEXT_EVENT_STREAM_VALUE)
+    @GetMapping(value = "event-stream", produces = MediaType.TEXT_EVENT_STREAM_VALUE)
     Flowable<DomainEvent> getDomainEventStream() {
         return observableDomainEventStream.eventStream();
     }

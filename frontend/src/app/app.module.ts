@@ -11,6 +11,7 @@ import { BookExplorerComponent } from './component/book-explorer/book-explorer.c
 import { BookCqrsExplorerComponent } from './component/book-cqrs-explorer/book-cqrs-explorer.component';
 import { LoaderComponent } from './component/loader/loader.component';
 import { PerformanceStatsComponent } from './component/performance-stats/performance-stats.component';
+import {FormsModule} from "@angular/forms";
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import { PerformanceStatsComponent } from './component/performance-stats/perform
   imports: [
     BrowserModule,
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -18,4 +18,8 @@ export class BooksEndpoint {
     return this.httpClient.get<BookResponse[]>(this.callsBaseUrl)
   }
 
+  addNewBook() {
+    return this.httpClient.post<BookResponse>(this.callsBaseUrl,null)
+  }
+
 }

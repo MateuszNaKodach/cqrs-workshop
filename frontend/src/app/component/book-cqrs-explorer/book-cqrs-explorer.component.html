@@ -2,7 +2,16 @@
   <div style="margin-top: 1rem; margin-bottom: 1rem;">
     Zapytanie wykonane w <b>{{lastRequestMillis.toFixed(2)}}</b> milisekund
   </div>
-  <app-book-list [books]="books"></app-book-list>
+  <div style="display: flex; justify-content: space-between">
+    <button type="button" class="btn btn-success" (click)="onClickNewFakeBook()">Add new fake book</button>
+    <div class="custom-control custom-checkbox">
+      <input type="checkbox" class="custom-control-input" id="customCheck1" (change)="isObserving ? startObserveEvents() : stopObserveEvents()" [(ngModel)]="isObserving">
+      <label class="custom-control-label" for="customCheck1">Observe for book updates</label>
+    </div>
+  </div>
+  <div style="margin-top: 1rem; margin-bottom: 1rem;">
+    <app-book-list [books]="books"></app-book-list>
+  </div>
 </div>
 <ng-template #loader>
   <div style="display: flex; justify-content: center; margin: 2rem;">
